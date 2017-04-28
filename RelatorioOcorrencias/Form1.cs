@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +17,6 @@ namespace RelatorioOcorrencias
     {
         private string[] listaOcorrencia;
         private string[] listaNome;
-        //List<RelatorioColaborador> ListaRelCol;
 
         public Form1()
         {
@@ -68,8 +69,19 @@ namespace RelatorioOcorrencias
                 ManipulaDados md = new ManipulaDados();
                 md.GeraListaRelatorio();
             }
-                catch { }
-            }
+            catch { }
+
+            //TabSobre
+            tabSobre.Paint += TabSobre_Paint;
+        }
+
+        private void TabSobre_Paint(object sender, PaintEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            Rectangle r = new Rectangle(0, 0, Width, Height);
+            LinearGradientBrush linear = new LinearGradientBrush(r, Color.LightBlue, Color.Blue, LinearGradientMode.ForwardDiagonal);
+            e.Graphics.FillRectangle(linear, r);
+        }
 
         private void ReleituraArquivo()
         {
@@ -84,10 +96,14 @@ namespace RelatorioOcorrencias
         {
             cbNome.Items.Clear();
             cbOcorrencia.Items.Clear();
+            cbCamposColaborador.Items.Clear();
+            cbCamposDataColaborador.Items.Clear();
 
             foreach (var item in listaNome)
             {
                 cbNome.Items.Add(item);
+                cbCamposColaborador.Items.Add(item);
+                cbCamposDataColaborador.Items.Add(item);
             }
 
             foreach (var item in listaOcorrencia)
@@ -95,27 +111,6 @@ namespace RelatorioOcorrencias
                 cbOcorrencia.Items.Add(item);
             }
         }
-
-        //private void GridRelatorio()
-        //{
-        //    string[] vetorRelatorio = File.ReadAllLines("relatorio.txt");
-        //    ListaRelCol = new List<RelatorioColaborador>();
-        //    DateTime data;
-        //    string nome;
-        //    string ocorrencia;
-        //    string observacao;
-
-        //    foreach (var item in vetorRelatorio)
-        //    {
-        //        string[] colunas = item.Split('|');
-        //        data = DateTime.Parse(colunas[0]);
-        //        nome = colunas[1];
-        //        ocorrencia = colunas[2];
-        //        observacao = colunas[3];
-        //        RelatorioColaborador relCol = new RelatorioColaborador(data, nome, ocorrencia, observacao);
-        //        ListaRelCol.Add(relCol);
-        //    }
-        //}
 
         private void btnCadastroNome_Click(object sender, EventArgs e)
         {
@@ -168,8 +163,10 @@ namespace RelatorioOcorrencias
         private void btnPrincipalLimpar_Click(object sender, EventArgs e)
         {
             txtData.Text = "";
-            txtCadastroNome.Text = "";
-            txtOcorrenciaCadastro.Text = "";
+            cbNome.Text = "";
+            cbOcorrencia.Text = "";
+            txtObservacao.Text = "";
+            btnPrincipalOcorrencia.Enabled = true;
         }
 
         private void btnPrincipalOpcoes_Click(object sender, EventArgs e)
@@ -211,6 +208,8 @@ namespace RelatorioOcorrencias
                 gbPrincipalData.Visible = false;
                 gbPrincipalColaborador.Visible = false;
                 gbPrincipalDataColaborador.Visible = true;
+                mtPrincipalDataColaboradorInicial.Text = "01/01/2017";
+                mtPrincipalDataColaboradorFinal.Text = "03/01/2017";
             }
         }
 
@@ -219,12 +218,99 @@ namespace RelatorioOcorrencias
             ManipulaDados md = new ManipulaDados();
             List<RelatorioColaborador> listarc = md.GeraListaRelatorio();
 
-            //allevents.Select(i => Enumerable.Range(0, 1 + (i.DateFinal - i.Date).Days).Select(dayCount => i.Date.AddDays(dayCount))).ToList()
-
-            var porData = listarc.Select(p => p.dataOcorrencia > Convert.ToDateTime(mtDataFinal.Text));
+            List<RelatorioColaborador> porData = new List<RelatorioColaborador>();
+            foreach (var item in listarc)
+            {
+                if (item.dataOcorrencia >= DateTime.Parse(mtDataInicial.Text) && item.dataOcorrencia <= DateTime.Parse(mtDataFinal.Text))
+                {
+                    RelatorioColaborador rc = new RelatorioColaborador(item.dataOcorrencia, item.nome, item.ocorrencia, item.observacao);
+                    porData.Add(rc);
+                }
+            }
 
             SaidaRelatorio sRel = new SaidaRelatorio(porData, "data");
             sRel.Show();
+        }
+
+        private void btnPrincipalCamposColaborador_Click(object sender, EventArgs e)
+        {
+            PopulaComboboxes();
+
+            ManipulaDados md = new ManipulaDados();
+            List<RelatorioColaborador> listarc = md.GeraListaRelatorio();
+
+            List<RelatorioColaborador> porColaborador = new List<RelatorioColaborador>();
+            foreach (var item in listarc)
+            {
+                if (item.nome.Equals(cbCamposColaborador.Text))
+                {
+                    RelatorioColaborador rc = new RelatorioColaborador(item.dataOcorrencia, item.nome, item.ocorrencia, item.observacao);
+                    porColaborador.Add(rc);
+                }
+            }
+
+            SaidaRelatorio sRel = new SaidaRelatorio(porColaborador, "colaborador");
+            sRel.Show();
+        }
+
+        private void btnPrincipalCamposDataColaborador_Click(object sender, EventArgs e)
+        {
+            PopulaComboboxes();
+
+            ManipulaDados md = new ManipulaDados();
+            List<RelatorioColaborador> listarc = md.GeraListaRelatorio();
+
+            List<RelatorioColaborador> porDataColaborador = new List<RelatorioColaborador>();
+            foreach (var item in listarc)
+            {
+                if (item.dataOcorrencia >= DateTime.Parse(mtPrincipalDataColaboradorInicial.Text) && 
+                    item.dataOcorrencia <= DateTime.Parse(mtPrincipalDataColaboradorFinal.Text) &&
+                    item.nome.Equals(cbCamposDataColaborador.Text))
+                {
+                    RelatorioColaborador rc = new RelatorioColaborador(item.dataOcorrencia, item.nome, item.ocorrencia, item.observacao);
+                    porDataColaborador.Add(rc);
+                }
+            }
+
+            SaidaRelatorio sRel = new SaidaRelatorio(porDataColaborador, "data+colaborador");
+            sRel.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblSobre1.Text = "Data da última versão: 28/04/2017";
+            lblSobre2.Text = "Desenvolvido por: Murilo Fujita";
+            lblSobre3.Text = "Contato: (19) 9 8202 9000";
+            lblSobre4.Text = "Licenciado para: Luciene Fujita";
+
+            lblSobre1.Location = new Point(lblSobre1.Location.X + 10, lblSobre1.Location.Y);
+            if (lblSobre1.Location.X > Width)
+            {
+                lblSobre1.Location = new Point(0, lblSobre1.Location.Y);
+            }
+
+            lblSobre2.Location = new Point(lblSobre2.Location.X + 10, lblSobre2.Location.Y);
+            if (lblSobre2.Location.X > Width)
+            {
+                lblSobre2.Location = new Point(0, lblSobre2.Location.Y);
+            }
+
+            lblSobre3.Location = new Point(lblSobre3.Location.X + 10, lblSobre3.Location.Y);
+            if (lblSobre3.Location.X > Width)
+            {
+                lblSobre3.Location = new Point(0, lblSobre3.Location.Y);
+            }
+
+            lblSobre4.Location = new Point(lblSobre4.Location.X + 10, lblSobre4.Location.Y);
+            if (lblSobre4.Location.X > Width)
+            {
+                lblSobre4.Location = new Point(0, lblSobre4.Location.Y);
+            }
+        }
+
+        private void tabControle_Selected(object sender, TabControlEventArgs e)
+        {
+            timer1_Tick(sender, e);
         }
     }
 }

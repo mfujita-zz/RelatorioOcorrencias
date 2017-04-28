@@ -13,17 +13,23 @@ namespace RelatorioOcorrencias
 {
     public partial class SaidaRelatorio : Form
     {
-        IEnumerable relatorioFiltrado;
-        //string itemBusca;
-        public SaidaRelatorio(IEnumerable opcao, string busca)
+        List<RelatorioColaborador> relatorioFiltrado;
+        public SaidaRelatorio(List<RelatorioColaborador> opcao, string busca)
         {
             InitializeComponent();
             relatorioFiltrado = opcao;
-            //itemBusca = busca;
 
             if (busca == "data")
             {
                 RelatorioData();
+            }
+            else if (busca == "colaborador")
+            {
+                RelatorioPorFuncionario();
+            }
+            else if (busca == "data+colaborador")
+            {
+                RelatorioDataColaborador();
             }
         }
 
@@ -41,24 +47,44 @@ namespace RelatorioOcorrencias
             dgvRelatorio.Font = new Font("Microsoft Sans Serif", 11f);
         }
 
+        private void LimpaGrid_Polula()
+        {
+            dgvRelatorio.Rows.Clear();
+
+            foreach (var item in relatorioFiltrado)
+            {
+                dgvRelatorio.Rows.Add(item.dataOcorrencia.ToShortDateString(), item.nome, item.ocorrencia, item.observacao);
+            }
+        }
+
         public void RelatorioData()
         {
             try
             {
-                dgvRelatorio.Rows.Clear();
-                ManipulaDados md = new ManipulaDados();
-
-                var listaData = md.GeraListaRelatorio();
-
-                foreach (var item in listaData)
-                {
-                    dgvRelatorio.Rows.Add(item.dataOcorrencia.ToShortDateString(), item.nome, item.ocorrencia, item.observacao);
-                }
+                LimpaGrid_Polula();
             }
             catch
             {
                 MessageBox.Show("Arquivo relatorio.txt não tem registro ainda.", "Aviso!");
             }
+        }
+
+        public void RelatorioPorFuncionario()
+        {
+            try
+            {
+                LimpaGrid_Polula();
+            }
+            catch { }
+        }
+
+        public void RelatorioDataColaborador()
+        {
+            try
+            {
+                LimpaGrid_Polula();
+            }
+            catch { }
         }
     }
 }

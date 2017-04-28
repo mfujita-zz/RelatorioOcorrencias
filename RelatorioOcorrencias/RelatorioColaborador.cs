@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RelatorioOcorrencias
 {
-    class RelatorioColaborador
+    public class RelatorioColaborador
     {
         public DateTime dataOcorrencia { get; set; }
         public string nome { get; set; }

@@ -28,15 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControle = new System.Windows.Forms.TabControl();
             this.tabPrincipal = new System.Windows.Forms.TabPage();
             this.gbVisualizacao = new System.Windows.Forms.GroupBox();
+            this.gbPrincipalDataColaborador = new System.Windows.Forms.GroupBox();
+            this.btnPrincipalCamposDataColaborador = new System.Windows.Forms.Button();
+            this.mtPrincipalDataColaboradorFinal = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.mtPrincipalDataColaboradorInicial = new System.Windows.Forms.MaskedTextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbCamposDataColaborador = new System.Windows.Forms.ComboBox();
+            this.gbPrincipalColaborador = new System.Windows.Forms.GroupBox();
+            this.btnPrincipalCamposColaborador = new System.Windows.Forms.Button();
+            this.cbCamposColaborador = new System.Windows.Forms.ComboBox();
+            this.gbPrincipalData = new System.Windows.Forms.GroupBox();
+            this.btnPrincipalCamposData = new System.Windows.Forms.Button();
+            this.mtDataFinal = new System.Windows.Forms.MaskedTextBox();
+            this.lblDataFinal = new System.Windows.Forms.Label();
+            this.mtDataInicial = new System.Windows.Forms.MaskedTextBox();
+            this.lblDataInicial = new System.Windows.Forms.Label();
             this.gbPrincipalOpcoes = new System.Windows.Forms.GroupBox();
             this.rbDataColaborador = new System.Windows.Forms.RadioButton();
             this.btnPrincipalOpcoes = new System.Windows.Forms.Button();
             this.rbColaborador = new System.Windows.Forms.RadioButton();
             this.rbData = new System.Windows.Forms.RadioButton();
             this.gbRegistrar = new System.Windows.Forms.GroupBox();
+            this.lblPrincipalObservacao = new System.Windows.Forms.Label();
             this.txtObservacao = new System.Windows.Forms.TextBox();
             this.lblPrincipalOcorrencia = new System.Windows.Forms.Label();
             this.lblPrincipalNome = new System.Windows.Forms.Label();
@@ -62,25 +80,18 @@
             this.gOcorrenciaGravar = new System.Windows.Forms.GroupBox();
             this.btnOcorrenciaGravar = new System.Windows.Forms.Button();
             this.txtOcorrenciaCadastro = new System.Windows.Forms.TextBox();
-            this.gbPrincipalData = new System.Windows.Forms.GroupBox();
-            this.lblDataInicial = new System.Windows.Forms.Label();
-            this.mtDataInicial = new System.Windows.Forms.MaskedTextBox();
-            this.lblDataFinal = new System.Windows.Forms.Label();
-            this.mtDataFinal = new System.Windows.Forms.MaskedTextBox();
-            this.btnPrincipalCamposData = new System.Windows.Forms.Button();
-            this.gbPrincipalColaborador = new System.Windows.Forms.GroupBox();
-            this.cbCamposColaborador = new System.Windows.Forms.ComboBox();
-            this.btnPrincipalCamposColaborador = new System.Windows.Forms.Button();
-            this.gbPrincipalDataColaborador = new System.Windows.Forms.GroupBox();
-            this.cbCamposDataColaborador = new System.Windows.Forms.ComboBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnPrincipalCamposDataColaborador = new System.Windows.Forms.Button();
+            this.tabSobre = new System.Windows.Forms.TabPage();
+            this.lblSobre4 = new System.Windows.Forms.Label();
+            this.lblSobre3 = new System.Windows.Forms.Label();
+            this.lblSobre2 = new System.Windows.Forms.Label();
+            this.lblSobre1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControle.SuspendLayout();
             this.tabPrincipal.SuspendLayout();
             this.gbVisualizacao.SuspendLayout();
+            this.gbPrincipalDataColaborador.SuspendLayout();
+            this.gbPrincipalColaborador.SuspendLayout();
+            this.gbPrincipalData.SuspendLayout();
             this.gbPrincipalOpcoes.SuspendLayout();
             this.gbRegistrar.SuspendLayout();
             this.tabCadastro.SuspendLayout();
@@ -91,9 +102,7 @@
             this.gOcorrenciaListagem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOcorrencias)).BeginInit();
             this.gOcorrenciaGravar.SuspendLayout();
-            this.gbPrincipalData.SuspendLayout();
-            this.gbPrincipalColaborador.SuspendLayout();
-            this.gbPrincipalDataColaborador.SuspendLayout();
+            this.tabSobre.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControle
@@ -101,12 +110,14 @@
             this.tabControle.Controls.Add(this.tabPrincipal);
             this.tabControle.Controls.Add(this.tabCadastro);
             this.tabControle.Controls.Add(this.tabOcorrencia);
+            this.tabControle.Controls.Add(this.tabSobre);
             this.tabControle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControle.Location = new System.Drawing.Point(1, 2);
             this.tabControle.Name = "tabControle";
             this.tabControle.SelectedIndex = 0;
             this.tabControle.Size = new System.Drawing.Size(1024, 583);
             this.tabControle.TabIndex = 0;
+            this.tabControle.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControle_Selected);
             // 
             // tabPrincipal
             // 
@@ -132,6 +143,166 @@
             this.gbVisualizacao.TabIndex = 3;
             this.gbVisualizacao.TabStop = false;
             this.gbVisualizacao.Text = "Opções do relatório";
+            // 
+            // gbPrincipalDataColaborador
+            // 
+            this.gbPrincipalDataColaborador.Controls.Add(this.btnPrincipalCamposDataColaborador);
+            this.gbPrincipalDataColaborador.Controls.Add(this.mtPrincipalDataColaboradorFinal);
+            this.gbPrincipalDataColaborador.Controls.Add(this.label1);
+            this.gbPrincipalDataColaborador.Controls.Add(this.mtPrincipalDataColaboradorInicial);
+            this.gbPrincipalDataColaborador.Controls.Add(this.label2);
+            this.gbPrincipalDataColaborador.Controls.Add(this.cbCamposDataColaborador);
+            this.gbPrincipalDataColaborador.Location = new System.Drawing.Point(581, 161);
+            this.gbPrincipalDataColaborador.Name = "gbPrincipalDataColaborador";
+            this.gbPrincipalDataColaborador.Size = new System.Drawing.Size(401, 179);
+            this.gbPrincipalDataColaborador.TabIndex = 5;
+            this.gbPrincipalDataColaborador.TabStop = false;
+            this.gbPrincipalDataColaborador.Text = "Buscar por data e colaborador";
+            // 
+            // btnPrincipalCamposDataColaborador
+            // 
+            this.btnPrincipalCamposDataColaborador.Location = new System.Drawing.Point(183, 132);
+            this.btnPrincipalCamposDataColaborador.Name = "btnPrincipalCamposDataColaborador";
+            this.btnPrincipalCamposDataColaborador.Size = new System.Drawing.Size(97, 30);
+            this.btnPrincipalCamposDataColaborador.TabIndex = 10;
+            this.btnPrincipalCamposDataColaborador.Text = "Confirmar";
+            this.btnPrincipalCamposDataColaborador.UseVisualStyleBackColor = true;
+            this.btnPrincipalCamposDataColaborador.Click += new System.EventHandler(this.btnPrincipalCamposDataColaborador_Click);
+            // 
+            // mtPrincipalDataColaboradorFinal
+            // 
+            this.mtPrincipalDataColaboradorFinal.Location = new System.Drawing.Point(9, 112);
+            this.mtPrincipalDataColaboradorFinal.Mask = "00/00/0000";
+            this.mtPrincipalDataColaboradorFinal.Name = "mtPrincipalDataColaboradorFinal";
+            this.mtPrincipalDataColaboradorFinal.Size = new System.Drawing.Size(100, 24);
+            this.mtPrincipalDataColaboradorFinal.TabIndex = 13;
+            this.mtPrincipalDataColaboradorFinal.ValidatingType = typeof(System.DateTime);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 18);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Data Final";
+            // 
+            // mtPrincipalDataColaboradorInicial
+            // 
+            this.mtPrincipalDataColaboradorInicial.Location = new System.Drawing.Point(9, 55);
+            this.mtPrincipalDataColaboradorInicial.Mask = "00/00/0000";
+            this.mtPrincipalDataColaboradorInicial.Name = "mtPrincipalDataColaboradorInicial";
+            this.mtPrincipalDataColaboradorInicial.Size = new System.Drawing.Size(100, 24);
+            this.mtPrincipalDataColaboradorInicial.TabIndex = 11;
+            this.mtPrincipalDataColaboradorInicial.ValidatingType = typeof(System.DateTime);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 31);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 18);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Data inicial";
+            // 
+            // cbCamposDataColaborador
+            // 
+            this.cbCamposDataColaborador.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCamposDataColaborador.FormattingEnabled = true;
+            this.cbCamposDataColaborador.Location = new System.Drawing.Point(128, 31);
+            this.cbCamposDataColaborador.Name = "cbCamposDataColaborador";
+            this.cbCamposDataColaborador.Size = new System.Drawing.Size(267, 26);
+            this.cbCamposDataColaborador.TabIndex = 9;
+            // 
+            // gbPrincipalColaborador
+            // 
+            this.gbPrincipalColaborador.Controls.Add(this.btnPrincipalCamposColaborador);
+            this.gbPrincipalColaborador.Controls.Add(this.cbCamposColaborador);
+            this.gbPrincipalColaborador.Location = new System.Drawing.Point(191, 161);
+            this.gbPrincipalColaborador.Name = "gbPrincipalColaborador";
+            this.gbPrincipalColaborador.Size = new System.Drawing.Size(384, 179);
+            this.gbPrincipalColaborador.TabIndex = 4;
+            this.gbPrincipalColaborador.TabStop = false;
+            this.gbPrincipalColaborador.Text = "Buscar por Colaborador";
+            // 
+            // btnPrincipalCamposColaborador
+            // 
+            this.btnPrincipalCamposColaborador.Location = new System.Drawing.Point(141, 142);
+            this.btnPrincipalCamposColaborador.Name = "btnPrincipalCamposColaborador";
+            this.btnPrincipalCamposColaborador.Size = new System.Drawing.Size(97, 30);
+            this.btnPrincipalCamposColaborador.TabIndex = 5;
+            this.btnPrincipalCamposColaborador.Text = "Confirmar";
+            this.btnPrincipalCamposColaborador.UseVisualStyleBackColor = true;
+            this.btnPrincipalCamposColaborador.Click += new System.EventHandler(this.btnPrincipalCamposColaborador_Click);
+            // 
+            // cbCamposColaborador
+            // 
+            this.cbCamposColaborador.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbCamposColaborador.FormattingEnabled = true;
+            this.cbCamposColaborador.Location = new System.Drawing.Point(6, 49);
+            this.cbCamposColaborador.Name = "cbCamposColaborador";
+            this.cbCamposColaborador.Size = new System.Drawing.Size(365, 26);
+            this.cbCamposColaborador.TabIndex = 9;
+            // 
+            // gbPrincipalData
+            // 
+            this.gbPrincipalData.Controls.Add(this.btnPrincipalCamposData);
+            this.gbPrincipalData.Controls.Add(this.mtDataFinal);
+            this.gbPrincipalData.Controls.Add(this.lblDataFinal);
+            this.gbPrincipalData.Controls.Add(this.mtDataInicial);
+            this.gbPrincipalData.Controls.Add(this.lblDataInicial);
+            this.gbPrincipalData.Location = new System.Drawing.Point(9, 161);
+            this.gbPrincipalData.Name = "gbPrincipalData";
+            this.gbPrincipalData.Size = new System.Drawing.Size(176, 179);
+            this.gbPrincipalData.TabIndex = 3;
+            this.gbPrincipalData.TabStop = false;
+            this.gbPrincipalData.Text = "Buscar por Data";
+            // 
+            // btnPrincipalCamposData
+            // 
+            this.btnPrincipalCamposData.Location = new System.Drawing.Point(12, 142);
+            this.btnPrincipalCamposData.Name = "btnPrincipalCamposData";
+            this.btnPrincipalCamposData.Size = new System.Drawing.Size(97, 30);
+            this.btnPrincipalCamposData.TabIndex = 4;
+            this.btnPrincipalCamposData.Text = "Confirmar";
+            this.btnPrincipalCamposData.UseVisualStyleBackColor = true;
+            this.btnPrincipalCamposData.Click += new System.EventHandler(this.btnPrincipalCamposData_Click);
+            // 
+            // mtDataFinal
+            // 
+            this.mtDataFinal.Location = new System.Drawing.Point(9, 108);
+            this.mtDataFinal.Mask = "00/00/0000";
+            this.mtDataFinal.Name = "mtDataFinal";
+            this.mtDataFinal.Size = new System.Drawing.Size(100, 24);
+            this.mtDataFinal.TabIndex = 3;
+            this.mtDataFinal.ValidatingType = typeof(System.DateTime);
+            // 
+            // lblDataFinal
+            // 
+            this.lblDataFinal.AutoSize = true;
+            this.lblDataFinal.Location = new System.Drawing.Point(6, 84);
+            this.lblDataFinal.Name = "lblDataFinal";
+            this.lblDataFinal.Size = new System.Drawing.Size(74, 18);
+            this.lblDataFinal.TabIndex = 2;
+            this.lblDataFinal.Text = "Data Final";
+            // 
+            // mtDataInicial
+            // 
+            this.mtDataInicial.Location = new System.Drawing.Point(9, 51);
+            this.mtDataInicial.Mask = "00/00/0000";
+            this.mtDataInicial.Name = "mtDataInicial";
+            this.mtDataInicial.Size = new System.Drawing.Size(100, 24);
+            this.mtDataInicial.TabIndex = 1;
+            this.mtDataInicial.ValidatingType = typeof(System.DateTime);
+            // 
+            // lblDataInicial
+            // 
+            this.lblDataInicial.AutoSize = true;
+            this.lblDataInicial.Location = new System.Drawing.Point(6, 27);
+            this.lblDataInicial.Name = "lblDataInicial";
+            this.lblDataInicial.Size = new System.Drawing.Size(79, 18);
+            this.lblDataInicial.TabIndex = 0;
+            this.lblDataInicial.Text = "Data inicial";
             // 
             // gbPrincipalOpcoes
             // 
@@ -191,6 +362,7 @@
             // 
             // gbRegistrar
             // 
+            this.gbRegistrar.Controls.Add(this.lblPrincipalObservacao);
             this.gbRegistrar.Controls.Add(this.txtObservacao);
             this.gbRegistrar.Controls.Add(this.lblPrincipalOcorrencia);
             this.gbRegistrar.Controls.Add(this.lblPrincipalNome);
@@ -206,6 +378,15 @@
             this.gbRegistrar.TabIndex = 2;
             this.gbRegistrar.TabStop = false;
             this.gbRegistrar.Text = "Registro da ocorrência";
+            // 
+            // lblPrincipalObservacao
+            // 
+            this.lblPrincipalObservacao.AutoSize = true;
+            this.lblPrincipalObservacao.Location = new System.Drawing.Point(633, 65);
+            this.lblPrincipalObservacao.Name = "lblPrincipalObservacao";
+            this.lblPrincipalObservacao.Size = new System.Drawing.Size(89, 18);
+            this.lblPrincipalObservacao.TabIndex = 9;
+            this.lblPrincipalObservacao.Text = "Observação";
             // 
             // txtObservacao
             // 
@@ -243,11 +424,11 @@
             // 
             // btnPrincipalLimpar
             // 
-            this.btnPrincipalLimpar.Location = new System.Drawing.Point(881, 139);
+            this.btnPrincipalLimpar.Location = new System.Drawing.Point(822, 139);
             this.btnPrincipalLimpar.Name = "btnPrincipalLimpar";
-            this.btnPrincipalLimpar.Size = new System.Drawing.Size(85, 30);
+            this.btnPrincipalLimpar.Size = new System.Drawing.Size(144, 30);
             this.btnPrincipalLimpar.TabIndex = 4;
-            this.btnPrincipalLimpar.Text = "Limpar";
+            this.btnPrincipalLimpar.Text = "Adicionar novo";
             this.btnPrincipalLimpar.UseVisualStyleBackColor = true;
             this.btnPrincipalLimpar.Click += new System.EventHandler(this.btnPrincipalLimpar_Click);
             // 
@@ -441,163 +622,65 @@
             this.txtOcorrenciaCadastro.Size = new System.Drawing.Size(617, 24);
             this.txtOcorrenciaCadastro.TabIndex = 2;
             // 
-            // gbPrincipalData
+            // tabSobre
             // 
-            this.gbPrincipalData.Controls.Add(this.btnPrincipalCamposData);
-            this.gbPrincipalData.Controls.Add(this.mtDataFinal);
-            this.gbPrincipalData.Controls.Add(this.lblDataFinal);
-            this.gbPrincipalData.Controls.Add(this.mtDataInicial);
-            this.gbPrincipalData.Controls.Add(this.lblDataInicial);
-            this.gbPrincipalData.Location = new System.Drawing.Point(9, 161);
-            this.gbPrincipalData.Name = "gbPrincipalData";
-            this.gbPrincipalData.Size = new System.Drawing.Size(176, 179);
-            this.gbPrincipalData.TabIndex = 3;
-            this.gbPrincipalData.TabStop = false;
-            this.gbPrincipalData.Text = "Buscar por Data";
+            this.tabSobre.Controls.Add(this.lblSobre4);
+            this.tabSobre.Controls.Add(this.lblSobre3);
+            this.tabSobre.Controls.Add(this.lblSobre2);
+            this.tabSobre.Controls.Add(this.lblSobre1);
+            this.tabSobre.Location = new System.Drawing.Point(4, 27);
+            this.tabSobre.Name = "tabSobre";
+            this.tabSobre.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSobre.Size = new System.Drawing.Size(1016, 552);
+            this.tabSobre.TabIndex = 3;
+            this.tabSobre.Text = "Sobre";
+            this.tabSobre.UseVisualStyleBackColor = true;
             // 
-            // lblDataInicial
+            // lblSobre4
             // 
-            this.lblDataInicial.AutoSize = true;
-            this.lblDataInicial.Location = new System.Drawing.Point(6, 27);
-            this.lblDataInicial.Name = "lblDataInicial";
-            this.lblDataInicial.Size = new System.Drawing.Size(79, 18);
-            this.lblDataInicial.TabIndex = 0;
-            this.lblDataInicial.Text = "Data inicial";
+            this.lblSobre4.AutoSize = true;
+            this.lblSobre4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSobre4.Location = new System.Drawing.Point(902, 423);
+            this.lblSobre4.Name = "lblSobre4";
+            this.lblSobre4.Size = new System.Drawing.Size(82, 31);
+            this.lblSobre4.TabIndex = 3;
+            this.lblSobre4.Text = "Texto";
             // 
-            // mtDataInicial
+            // lblSobre3
             // 
-            this.mtDataInicial.Location = new System.Drawing.Point(9, 51);
-            this.mtDataInicial.Mask = "00/00/0000";
-            this.mtDataInicial.Name = "mtDataInicial";
-            this.mtDataInicial.Size = new System.Drawing.Size(100, 24);
-            this.mtDataInicial.TabIndex = 1;
-            this.mtDataInicial.ValidatingType = typeof(System.DateTime);
+            this.lblSobre3.AutoSize = true;
+            this.lblSobre3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSobre3.Location = new System.Drawing.Point(610, 311);
+            this.lblSobre3.Name = "lblSobre3";
+            this.lblSobre3.Size = new System.Drawing.Size(82, 31);
+            this.lblSobre3.TabIndex = 2;
+            this.lblSobre3.Text = "Texto";
             // 
-            // lblDataFinal
+            // lblSobre2
             // 
-            this.lblDataFinal.AutoSize = true;
-            this.lblDataFinal.Location = new System.Drawing.Point(6, 84);
-            this.lblDataFinal.Name = "lblDataFinal";
-            this.lblDataFinal.Size = new System.Drawing.Size(74, 18);
-            this.lblDataFinal.TabIndex = 2;
-            this.lblDataFinal.Text = "Data Final";
+            this.lblSobre2.AutoSize = true;
+            this.lblSobre2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSobre2.Location = new System.Drawing.Point(177, 199);
+            this.lblSobre2.Name = "lblSobre2";
+            this.lblSobre2.Size = new System.Drawing.Size(82, 31);
+            this.lblSobre2.TabIndex = 1;
+            this.lblSobre2.Text = "Texto";
             // 
-            // mtDataFinal
+            // lblSobre1
             // 
-            this.mtDataFinal.Location = new System.Drawing.Point(9, 108);
-            this.mtDataFinal.Mask = "00/00/0000";
-            this.mtDataFinal.Name = "mtDataFinal";
-            this.mtDataFinal.Size = new System.Drawing.Size(100, 24);
-            this.mtDataFinal.TabIndex = 3;
-            this.mtDataFinal.ValidatingType = typeof(System.DateTime);
+            this.lblSobre1.AutoSize = true;
+            this.lblSobre1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSobre1.Location = new System.Drawing.Point(375, 87);
+            this.lblSobre1.Name = "lblSobre1";
+            this.lblSobre1.Size = new System.Drawing.Size(82, 31);
+            this.lblSobre1.TabIndex = 0;
+            this.lblSobre1.Text = "Texto";
             // 
-            // btnPrincipalCamposData
+            // timer1
             // 
-            this.btnPrincipalCamposData.Location = new System.Drawing.Point(12, 142);
-            this.btnPrincipalCamposData.Name = "btnPrincipalCamposData";
-            this.btnPrincipalCamposData.Size = new System.Drawing.Size(97, 30);
-            this.btnPrincipalCamposData.TabIndex = 4;
-            this.btnPrincipalCamposData.Text = "Confirmar";
-            this.btnPrincipalCamposData.UseVisualStyleBackColor = true;
-            this.btnPrincipalCamposData.Click += new System.EventHandler(this.btnPrincipalCamposData_Click);
-            // 
-            // gbPrincipalColaborador
-            // 
-            this.gbPrincipalColaborador.Controls.Add(this.btnPrincipalCamposColaborador);
-            this.gbPrincipalColaborador.Controls.Add(this.cbCamposColaborador);
-            this.gbPrincipalColaborador.Location = new System.Drawing.Point(191, 161);
-            this.gbPrincipalColaborador.Name = "gbPrincipalColaborador";
-            this.gbPrincipalColaborador.Size = new System.Drawing.Size(384, 179);
-            this.gbPrincipalColaborador.TabIndex = 4;
-            this.gbPrincipalColaborador.TabStop = false;
-            this.gbPrincipalColaborador.Text = "Buscar por Colaborador";
-            // 
-            // cbCamposColaborador
-            // 
-            this.cbCamposColaborador.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCamposColaborador.FormattingEnabled = true;
-            this.cbCamposColaborador.Location = new System.Drawing.Point(6, 49);
-            this.cbCamposColaborador.Name = "cbCamposColaborador";
-            this.cbCamposColaborador.Size = new System.Drawing.Size(365, 26);
-            this.cbCamposColaborador.TabIndex = 9;
-            // 
-            // btnPrincipalCamposColaborador
-            // 
-            this.btnPrincipalCamposColaborador.Location = new System.Drawing.Point(141, 142);
-            this.btnPrincipalCamposColaborador.Name = "btnPrincipalCamposColaborador";
-            this.btnPrincipalCamposColaborador.Size = new System.Drawing.Size(97, 30);
-            this.btnPrincipalCamposColaborador.TabIndex = 5;
-            this.btnPrincipalCamposColaborador.Text = "Confirmar";
-            this.btnPrincipalCamposColaborador.UseVisualStyleBackColor = true;
-            // 
-            // gbPrincipalDataColaborador
-            // 
-            this.gbPrincipalDataColaborador.Controls.Add(this.btnPrincipalCamposDataColaborador);
-            this.gbPrincipalDataColaborador.Controls.Add(this.maskedTextBox1);
-            this.gbPrincipalDataColaborador.Controls.Add(this.label1);
-            this.gbPrincipalDataColaborador.Controls.Add(this.maskedTextBox2);
-            this.gbPrincipalDataColaborador.Controls.Add(this.label2);
-            this.gbPrincipalDataColaborador.Controls.Add(this.cbCamposDataColaborador);
-            this.gbPrincipalDataColaborador.Location = new System.Drawing.Point(581, 171);
-            this.gbPrincipalDataColaborador.Name = "gbPrincipalDataColaborador";
-            this.gbPrincipalDataColaborador.Size = new System.Drawing.Size(401, 169);
-            this.gbPrincipalDataColaborador.TabIndex = 5;
-            this.gbPrincipalDataColaborador.TabStop = false;
-            this.gbPrincipalDataColaborador.Text = "Buscar por data e colaborador";
-            // 
-            // cbCamposDataColaborador
-            // 
-            this.cbCamposDataColaborador.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbCamposDataColaborador.FormattingEnabled = true;
-            this.cbCamposDataColaborador.Location = new System.Drawing.Point(128, 31);
-            this.cbCamposDataColaborador.Name = "cbCamposDataColaborador";
-            this.cbCamposDataColaborador.Size = new System.Drawing.Size(267, 26);
-            this.cbCamposDataColaborador.TabIndex = 9;
-            // 
-            // maskedTextBox1
-            // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(9, 112);
-            this.maskedTextBox1.Mask = "00/00/0000";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 24);
-            this.maskedTextBox1.TabIndex = 13;
-            this.maskedTextBox1.ValidatingType = typeof(System.DateTime);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 88);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 18);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Data Final";
-            // 
-            // maskedTextBox2
-            // 
-            this.maskedTextBox2.Location = new System.Drawing.Point(9, 55);
-            this.maskedTextBox2.Mask = "00/00/0000";
-            this.maskedTextBox2.Name = "maskedTextBox2";
-            this.maskedTextBox2.Size = new System.Drawing.Size(100, 24);
-            this.maskedTextBox2.TabIndex = 11;
-            this.maskedTextBox2.ValidatingType = typeof(System.DateTime);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 31);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 18);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Data inicial";
-            // 
-            // btnPrincipalCamposDataColaborador
-            // 
-            this.btnPrincipalCamposDataColaborador.Location = new System.Drawing.Point(183, 132);
-            this.btnPrincipalCamposDataColaborador.Name = "btnPrincipalCamposDataColaborador";
-            this.btnPrincipalCamposDataColaborador.Size = new System.Drawing.Size(97, 30);
-            this.btnPrincipalCamposDataColaborador.TabIndex = 10;
-            this.btnPrincipalCamposDataColaborador.Text = "Confirmar";
-            this.btnPrincipalCamposDataColaborador.UseVisualStyleBackColor = true;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 200;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -611,6 +694,11 @@
             this.tabControle.ResumeLayout(false);
             this.tabPrincipal.ResumeLayout(false);
             this.gbVisualizacao.ResumeLayout(false);
+            this.gbPrincipalDataColaborador.ResumeLayout(false);
+            this.gbPrincipalDataColaborador.PerformLayout();
+            this.gbPrincipalColaborador.ResumeLayout(false);
+            this.gbPrincipalData.ResumeLayout(false);
+            this.gbPrincipalData.PerformLayout();
             this.gbPrincipalOpcoes.ResumeLayout(false);
             this.gbPrincipalOpcoes.PerformLayout();
             this.gbRegistrar.ResumeLayout(false);
@@ -625,11 +713,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvOcorrencias)).EndInit();
             this.gOcorrenciaGravar.ResumeLayout(false);
             this.gOcorrenciaGravar.PerformLayout();
-            this.gbPrincipalData.ResumeLayout(false);
-            this.gbPrincipalData.PerformLayout();
-            this.gbPrincipalColaborador.ResumeLayout(false);
-            this.gbPrincipalDataColaborador.ResumeLayout(false);
-            this.gbPrincipalDataColaborador.PerformLayout();
+            this.tabSobre.ResumeLayout(false);
+            this.tabSobre.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -672,9 +757,9 @@
         private System.Windows.Forms.RadioButton rbData;
         private System.Windows.Forms.GroupBox gbPrincipalDataColaborador;
         private System.Windows.Forms.Button btnPrincipalCamposDataColaborador;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.MaskedTextBox mtPrincipalDataColaboradorFinal;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox2;
+        private System.Windows.Forms.MaskedTextBox mtPrincipalDataColaboradorInicial;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbCamposDataColaborador;
         private System.Windows.Forms.GroupBox gbPrincipalColaborador;
@@ -686,6 +771,13 @@
         private System.Windows.Forms.Label lblDataFinal;
         private System.Windows.Forms.MaskedTextBox mtDataInicial;
         private System.Windows.Forms.Label lblDataInicial;
+        private System.Windows.Forms.Label lblPrincipalObservacao;
+        private System.Windows.Forms.TabPage tabSobre;
+        private System.Windows.Forms.Label lblSobre1;
+        private System.Windows.Forms.Label lblSobre4;
+        private System.Windows.Forms.Label lblSobre3;
+        private System.Windows.Forms.Label lblSobre2;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
