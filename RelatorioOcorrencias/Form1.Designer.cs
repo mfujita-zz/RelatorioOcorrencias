@@ -133,6 +133,8 @@
             // 
             // gbVisualizacao
             // 
+            this.gbVisualizacao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbVisualizacao.Controls.Add(this.gbPrincipalDataColaborador);
             this.gbVisualizacao.Controls.Add(this.gbPrincipalColaborador);
             this.gbVisualizacao.Controls.Add(this.gbPrincipalData);
@@ -362,6 +364,8 @@
             // 
             // gbRegistrar
             // 
+            this.gbRegistrar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbRegistrar.Controls.Add(this.lblPrincipalObservacao);
             this.gbRegistrar.Controls.Add(this.txtObservacao);
             this.gbRegistrar.Controls.Add(this.lblPrincipalOcorrencia);

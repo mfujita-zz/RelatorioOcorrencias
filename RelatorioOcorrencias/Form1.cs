@@ -62,11 +62,24 @@ namespace RelatorioOcorrencias
             gbPrincipalColaborador.Visible = false;
             gbPrincipalDataColaborador.Visible = false;
 
-            try
+            if (!VerificaArqColaborador())
             {
-                ReleituraArquivo();
+                MessageBox.Show("Nenhum colaborador cadastrado. \r\nPor favor, cadastre um.", "Aviso!");
+                tabControle.SelectedIndex = 1;
+            }
+            if (!VerificaArqOcorrencias())
+            {
+                MessageBox.Show("Nenhuma ocorrência cadastrada. \r\nPor favor, cadastre uma.", "Aviso!");
+                tabControle.SelectedIndex = 2;
+            }
+
+            //try
+            //{
+            ReleituraArquivo();
                 PopulaComboboxes();
                 ManipulaDados md = new ManipulaDados();
+            try
+            { 
                 md.GeraListaRelatorio();
             }
             catch { }
@@ -81,6 +94,20 @@ namespace RelatorioOcorrencias
             Rectangle r = new Rectangle(0, 0, Width, Height);
             LinearGradientBrush linear = new LinearGradientBrush(r, Color.LightBlue, Color.Blue, LinearGradientMode.ForwardDiagonal);
             e.Graphics.FillRectangle(linear, r);
+        }
+
+        private bool VerificaArqColaborador()
+        {
+            if (File.Exists("colaboradores.txt"))
+                return true;
+            return false;
+        }
+
+        private bool VerificaArqOcorrencias()
+        {
+            if (File.Exists("ocorrencias.txt"))
+                return true;
+            return false;
         }
 
         private void ReleituraArquivo()
@@ -99,16 +126,22 @@ namespace RelatorioOcorrencias
             cbCamposColaborador.Items.Clear();
             cbCamposDataColaborador.Items.Clear();
 
-            foreach (var item in listaNome)
-            {
-                cbNome.Items.Add(item);
-                cbCamposColaborador.Items.Add(item);
-                cbCamposDataColaborador.Items.Add(item);
+            if (File.Exists("colaboradores.txt") && listaNome != null)
+            { 
+                foreach (var item in listaNome)
+                {
+                    cbNome.Items.Add(item);
+                    cbCamposColaborador.Items.Add(item);
+                    cbCamposDataColaborador.Items.Add(item);
+                }
             }
 
-            foreach (var item in listaOcorrencia)
+            if (File.Exists("ocorrencias.txt"))
             {
-                cbOcorrencia.Items.Add(item);
+                foreach (var item in listaOcorrencia)
+                {
+                    cbOcorrencia.Items.Add(item);
+                }
             }
         }
 
@@ -169,24 +202,6 @@ namespace RelatorioOcorrencias
             btnPrincipalOcorrencia.Enabled = true;
         }
 
-        private void btnPrincipalOpcoes_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    dgvRelatorio.Rows.Clear();
-            //    GridRelatorio();
-
-            //    foreach (var item in ListaRelCol)
-            //    {
-            //        dgvRelatorio.Rows.Add(item.dataOcorrencia.ToShortDateString(), item.nome, item.ocorrencia, item.observacao);
-            //    }
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Arquivo relatorio.txt não tem registro ainda.", "Aviso!");
-            //}
-        }
-
         private void btnPrincipalOpcoes_Click_1(object sender, EventArgs e)
         {
             if (rbData.Checked)
@@ -194,8 +209,7 @@ namespace RelatorioOcorrencias
                 gbPrincipalData.Visible = true;
                 gbPrincipalColaborador.Visible = false;
                 gbPrincipalDataColaborador.Visible = false;
-                mtDataInicial.Text = "01/01/2017";
-                mtDataFinal.Text = "03/01/2017";
+                //Coloque datas aqui para testar
             }
             else if (rbColaborador.Checked)
             {
@@ -208,8 +222,7 @@ namespace RelatorioOcorrencias
                 gbPrincipalData.Visible = false;
                 gbPrincipalColaborador.Visible = false;
                 gbPrincipalDataColaborador.Visible = true;
-                mtPrincipalDataColaboradorInicial.Text = "01/01/2017";
-                mtPrincipalDataColaboradorFinal.Text = "03/01/2017";
+                //Coloque datas aqui para testar   //mtPrincipalDataColaboradorInicial.Text = "01/01/2017";
             }
         }
 
@@ -286,7 +299,7 @@ namespace RelatorioOcorrencias
             lblSobre1.Location = new Point(lblSobre1.Location.X + 10, lblSobre1.Location.Y);
             if (lblSobre1.Location.X > Width)
             {
-                lblSobre1.Location = new Point(0, lblSobre1.Location.Y);
+                lblSobre1.Location = new Point(0 -lblSobre1.Width, lblSobre1.Location.Y);
             }
 
             lblSobre2.Location = new Point(lblSobre2.Location.X + 10, lblSobre2.Location.Y);
@@ -310,7 +323,15 @@ namespace RelatorioOcorrencias
 
         private void tabControle_Selected(object sender, TabControlEventArgs e)
         {
-            timer1_Tick(sender, e);
+            if (tabControle.SelectedIndex == 3)
+            {
+                timer1.Start();
+                timer1_Tick(sender, e);
+            }
+            else
+            {
+                timer1.Stop();
+            }
         }
     }
 }

@@ -86,5 +86,17 @@ namespace RelatorioOcorrencias
             }
             catch { }
         }
+
+        private void SaidaRelatorio_Resize(object sender, EventArgs e)
+        {
+            //Modifica as dimensões do datagridView quando o Form é redimensionado
+            dgvRelatorio.Size = new Size(Width * 97 / 100, Height * 80 / 100);
+            dgvRelatorio.Columns[0].Width = dgvRelatorio.Width * 10 / 100;
+            dgvRelatorio.Columns[1].Width = dgvRelatorio.Width * 25 / 100;
+            dgvRelatorio.Columns[2].Width = dgvRelatorio.Width * 30 / 100;
+            dgvRelatorio.Columns[3].Width = dgvRelatorio.Width * 33 / 100;
+            dgvRelatorio.Location = new Point(0, lblSaidaDescricao.Bottom + 20);
+            dgvRelatorio.Font = new Font("Microsoft Sans Serif", 11f);
+        }
     }
 }
